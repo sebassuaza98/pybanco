@@ -2,18 +2,18 @@ from pydantic import BaseModel, Field
 from bson import ObjectId
 from typing import Optional
 
-# Modelo base para MongoDB
 class MongoBaseModel(BaseModel):
     class Config:
         allow_population_by_field_name = True
         arbitrary_types_allowed = True
         json_encoders = {
-            ObjectId: str  # Convierte ObjectId a str para la serialización
+            ObjectId: str
         }
 
-# Modelo de Fondos
-class Fund(MongoBaseModel):
-    id: str
-    name: str
-    minimum_investment: int
-    category: str
+class Client(MongoBaseModel):
+    identification: str
+    first_name: str
+    last_name: str
+    phone: str
+    email: str
+    balance: float
