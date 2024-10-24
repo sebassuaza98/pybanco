@@ -1,8 +1,7 @@
 from pymongo import MongoClient
-from bson import ObjectId
-from app.models.client import Client
-from app.schemas.schemas_client import ClientCreate
-from app.exceptions.exceptions import ClientAlreadyExistsException, ClientNotFoundException
+from app.clients.models.client import Client
+from app.clients.schemas.schemas_client import ClientCreate
+from app.clients.exceptions.exceptions import ClientAlreadyExistsException, ClientNotFoundException
 
 class Database:
     def __init__(self, uri: str, db_name: str):

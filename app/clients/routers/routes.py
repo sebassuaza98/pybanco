@@ -1,11 +1,10 @@
-from fastapi import APIRouter
+#from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from app.schemas.schemas_client import ClientCreate, ClientResponse
-from app.schemas.schemas_found import FundResponse
-from app.services.client_services import ClientService
-from app.services.fund_service import FundService
+from app.clients.schemas.schemas_client import ClientCreate, ClientResponse
+from app.clients.services.client_services import ClientService
+from app.routers import (router)
 
-router = APIRouter()
+router = router
 client_service = ClientService()
 
 @router.get("/clients", response_model=list[ClientResponse])
@@ -21,8 +20,3 @@ async def create_client(client: ClientCreate):
 async def filter_by_identification(identification: str):
     client = client_service.filter_by_identification(identification)
     return client
-
-fund_service = FundService()
-@router.get("/funds", response_model=list[FundResponse]) 
-async def list_funds():
-    return fund_service.list_funds()

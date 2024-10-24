@@ -1,0 +1,25 @@
+from pydantic import BaseModel, Field
+from bson import ObjectId
+from typing import Optional
+from datetime import datetime
+
+class MongoBaseModel(BaseModel):
+    class Config:
+        json_encoders = {
+            ObjectId: str,
+        }
+
+class Transaction(MongoBaseModel):
+    id: Optional[str] = Field(default=None, alias="_id")
+    fund_id: str
+    type: str
+    mount: float
+    client_id: str
+
+class HistoryTransaction(MongoBaseModel):
+    id: Optional[str] = Field(default=None, alias="_id")
+    fund_id: str
+    type: str
+    mount: float
+    date: datetime
+    client_id: str
